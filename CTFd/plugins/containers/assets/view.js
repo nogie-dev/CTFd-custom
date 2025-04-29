@@ -146,6 +146,7 @@ function view_container_info(challenge_id) {
 
 function container_request(challenge_id) {
     var path = "/containers/api/request";
+    var logging_path = "http://localhost:5000/api/container_logging"
     let alert = resetAlert();
 
     fetch(path, {
@@ -174,6 +175,8 @@ function container_request(challenge_id) {
             createChallengeLinkElement(data, alert);
             toggleChallengeUpdate();
             toggleChallengeCreate();
+            // Logging
+            fetch(logging_path,{method:"POST",}).then(console.log("Anti-Cheat Container Info Logging..."))
         }
     })
     .catch(error => {
@@ -252,4 +255,3 @@ function container_stop(challenge_id) {
         console.error("Fetch error:", error);
     });
 }
-
