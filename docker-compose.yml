@@ -34,11 +34,8 @@ services:
       - 80:80
     depends_on:
       - ctfd
-  
-  # cheat_logging_db:
-  #   environment: 
-  #     - DATABASE_URL=mysql+pymysql://ctfd:ctfd@db/loggingdb
-
+    networks:
+      - default
   db:
     image: mariadb:10.11
     restart: always
