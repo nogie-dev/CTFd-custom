@@ -12,9 +12,9 @@ from CTFd.models import (
 )
 from CTFd.plugins import register_plugin_assets_directory
 from CTFd.plugins.flags import FlagException, get_flag_class
+from CTFd.plugins.cheatDetecter import cheat_detecter
 from CTFd.utils.uploads import delete_file
 from CTFd.utils.user import get_ip
-
 
 class BaseChallenge(object):
     id = None
@@ -123,7 +123,9 @@ class BaseChallenge(object):
         flags = Flags.query.filter_by(challenge_id=challenge.id).all()
         for flag in flags:
             try:
+                cheat_detecter(submission)
                 if get_flag_class(flag.type).compare(flag, submission):
+                    
                     return True, "Correct"
             except FlagException as e:
                 return False, str(e)

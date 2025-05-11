@@ -18,6 +18,8 @@ from CTFd.utils import get_config
 from .models import ContainerChallengeModel, ContainerInfoModel, ContainerSettingsModel
 from .container_manager import ContainerManager, ContainerException
 
+from CTFd.plugins.cheatDetecter import flag_created_log
+
 def get_settings_path():
     import os
     return os.path.join(os.path.dirname(os.path.abspath(__file__)), "settings.json")
@@ -266,6 +268,7 @@ def load(app: Flask):
         try:
             created_container = container_manager.create_container(
                 chal_id, xid, uid, challenge.image, challenge.port, challenge.command, challenge.volumes)
+            flag_created_log(created_container.id ,chal_id, xid, uid)
         except ContainerException as err:
             return {"error": str(err)}
 
