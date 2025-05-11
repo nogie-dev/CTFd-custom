@@ -1,0 +1,3 @@
+[submodule "cheatDetecter"]
+	path = cheatDetecter
+	url = https://github.com/nogie-dev/cheatDetecter.git
