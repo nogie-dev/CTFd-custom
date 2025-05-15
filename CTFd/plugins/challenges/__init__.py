@@ -125,7 +125,6 @@ class BaseChallenge(object):
             try:
                 cheat_detecter(submission)
                 if get_flag_class(flag.type).compare(flag, submission):
-                    
                     return True, "Correct"
             except FlagException as e:
                 return False, str(e)
